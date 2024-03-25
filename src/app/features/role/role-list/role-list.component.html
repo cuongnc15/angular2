@@ -1,0 +1,125 @@
+<div class="">
+  <div class="p-[20px] w-full text-[14px]">
+    <form [formGroup]="applyForm" class="grid grid-cols-5 gap-[15px] bg-white">
+      <input
+        (input)="changeSearch()"
+        formControlName="username"
+        class="border boder-inputBorder rounded-[8px] p-[10px] mb-[10px] focus:outline-none"
+        type="text"
+        placeholder="username"
+      />
+      <input
+        formControlName="agency"
+        (input)="changeSearch()"
+        class="border boder-inputBorder rounded-[8px] p-[10px] mb-[10px] focus:outline-none"
+        type="text"
+        placeholder="Agency"
+      />
+
+      <div class="border boder-inputBorder rounded-[8px] p-[10px] mb-[10px]">
+        <mat-select placeholder="Chọn chức vụ">
+          @for (tittle of tittles; track tittle) {
+          <mat-option [value]="tittle.value">{{ tittle.viewValue }}</mat-option>
+          }
+        </mat-select>
+      </div>
+
+      <app-status></app-status>
+      <app-button-search></app-button-search>
+    </form>
+  </div>
+
+  <div class="bg-bgGrey p-[20px] w-full">
+    <div class="flex items-center justify-between pb-[10px]">
+      <p class="text-primary font-bold">DANH SÁCH VAI TRÒ</p>
+
+      <button
+        class="text-primary flex items-center bg-[#E7F7F4] font-semibold border border-primary px-[16px] py-[8px] rounded-[6px]"
+        (click)="addModal()"
+      >
+        <span
+          class="p-[5px]"
+          nz-icon
+          nzType="plus-circle"
+          nzTheme="outline"
+        ></span>
+        Thêm mới
+      </button>
+    </div>
+
+    <table
+      class="w-full font-normal border-collapse rounded-[16px] bg-white border border-inputBorder mt-[20px]"
+    >
+      <thead class="font-bold text-textDarkBold">
+        <tr class="truncate table-row hover:text-clip border rounded-[8px]">
+          <th class="p-[10px] border rounded-[8px] border-inputBorder">STT</th>
+          <th class="p-[10px] border border-inputBorder">Username</th>
+          <th class="p-[10px] border border-inputBorder">Agency</th>
+          <th class="p-[10px] border border-inputBorder">Vai trò</th>
+          <th class="p-[10px] border border-inputBorder">Ngày cấp quyền</th>
+          <th class="p-[10px] border border-inputBorder">Ngày thu hồi</th>
+          <th class="p-[10px] border border-inputBorder">Trạng thái</th>
+        </tr>
+      </thead>
+
+      <tbody class="text-textDarkBold">
+        <tr
+          *ngFor="
+            let number = index;
+            let role;
+            of: roles
+              | paginate
+                : {
+                    itemsPerPage: pageSize,
+                    currentPage: page,
+                    totalItems: total
+                  }
+          "
+          class="table-row w-full"
+          (click)="addModalDetail((page - 1) * pageSize + number)"
+        >
+          <td class="p-[10px] text-center border border-inputBorder">
+            {{ (page - 1) * pageSize + number + 1 }}
+          </td>
+          <td
+            class="p-[10px] text-[#5CBF91] font-semibold border border-inputBorder"
+          >
+            {{ role.userName }}
+          </td>
+          <td class="p-[10px] border border-inputBorder">
+            {{ role.agency }}
+          </td>
+          <td class="p-[10px] border border-inputBorder">
+            {{ role.role }}
+          </td>
+          <td class="p-[10px] border border-inputBorder">
+            {{ role.effectiveDate }}
+          </td>
+          <td class="p-[10px] border border-inputBorder">
+            {{ role.expirationDate }}
+          </td>
+          <td class="p-[10px] border border-inputBorder">
+            {{ role.status }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="flex justify-end p-[10px]">
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </div>
+  </div>
+</div>
+
+<app-role-add
+  *ngIf="modal"
+  (closeEvent)="closeModal()"
+  (getEvent)="getRoleList()"
+></app-role-add>
+
+<app-role-edit
+  *ngIf="modalDetail"
+  (closeEvent)="closeModalDetail()"
+  (getEvent)="getRoleList()"
+  [data]="dataFromParent"
+></app-role-edit>

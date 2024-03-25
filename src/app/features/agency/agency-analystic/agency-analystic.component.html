@@ -1,0 +1,252 @@
+<div class="bg-bgGrey p-[20px] h-full">
+  <div class="w-full bg-white border boder-inputBorder rounded-[16px] p-[30px]">
+    <p class="text-textDarkBold font-bold pb-[10px]">Thông số Agency</p>
+    <div class="border-b mb-[30px]"></div>
+
+    <div
+      class="w-[25%] border boder-inputBorder rounded-[8px] p-[10px] mb-[10px]"
+    >
+      <mat-select placeholder="Chọn Agency" (selectionChange)="showDetail()">
+        @for (agency of agencyes; track agency) {
+        <mat-option [value]="agency.value">{{ agency.viewValue }}</mat-option>
+        }
+      </mat-select>
+    </div>
+
+    <div class="flex gap-[50px]" *ngIf="detailAgency">
+      <div class="w-[50%]">
+        <div
+          class="p-[16px] mb-[10px] flex justify-between boder-inputBorder border-b"
+        >
+          <p>Số lượng Admin</p>
+          <p>3/3</p>
+        </div>
+        <div
+          class="p-[16px] mb-[10px] flex justify-between boder-inputBorder border-b"
+        >
+          <p>Số lượng người dùng</p>
+          <p>3/3</p>
+        </div>
+        <div
+          class="p-[16px] mb-[10px] flex justify-between boder-inputBorder border-b"
+        >
+          <p>Số lượng CTV</p>
+          <p>3/3</p>
+        </div>
+        <div
+          class="p-[16px] mb-[10px] flex justify-between boder-inputBorder border-b"
+        >
+          <p>Số GB đã dùng</p>
+          <p>3/3</p>
+        </div>
+        <div
+          class="p-[16px] mb-[10px] flex justify-between boder-inputBorder border-b"
+        >
+          <p>Số lượng thông báo trong thái</p>
+          <p>3/3</p>
+        </div>
+        <div
+          class="p-[16px] mb-[10px] flex justify-between boder-inputBorder border-b"
+        >
+          <p>Số lượng đơn hàng</p>
+          <p>3/3</p>
+        </div>
+        <div
+          class="p-[16px] mb-[10px] flex justify-between boder-inputBorder border-b"
+        >
+          <p>Ngày backup gần nhất</p>
+          <p>3/3</p>
+        </div>
+        <div
+          class="p-[16px] mb-[10px] flex justify-between boder-inputBorder border-b"
+        >
+          <p>Ngày hết hạn WEB</p>
+          <p>3/3</p>
+        </div>
+      </div>
+      <div class="w-[50%]">
+        <div
+          class="w-[50%] border boder-inputBorder rounded-[8px] p-[10px] mb-[11px]"
+        >
+          <mat-select
+            placeholder="Thời gian"
+            (selectionChange)="showDetailWithTime()"
+          >
+            @for (period of periods; track period) {
+            <mat-option [value]="period.value">{{
+              period.viewValue
+            }}</mat-option>
+            }
+          </mat-select>
+        </div>
+
+        <div *ngIf="detailWithTime">
+          <div
+            class="p-[16px] mb-[10px] flex justify-between boder-inputBorder border-b"
+          >
+            <div class="w-[90%] flex justify-between">
+              <p>Số lượng đợn hàng</p>
+              <p>3/3</p>
+            </div>
+            <div class="flex items-center">
+              <span
+                *ngIf="iconDown"
+                class="cursor-pointer"
+                nz-icon
+                nzType="down"
+                nzTheme="outline"
+                (click)="showOrderTongle()"
+              ></span>
+              <span
+                class="cursor-pointer"
+                (click)="hideOrderTongle()"
+                *ngIf="showOrder"
+                nz-icon
+                nzType="up"
+                nzTheme="outline"
+              ></span>
+            </div>
+          </div>
+
+          <div *ngIf="showOrder">
+            <div class="flex justify-end">
+              <div
+                class="p-[16px] w-[80%] mb-[10px] flex justify-between boder-inputBorder border-b"
+              >
+                <div class="w-[87.5%] flex justify-between">
+                  <p>Số lượng đơn thường</p>
+                  <p>3/3</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-end">
+              <div
+                class="p-[16px] w-[80%] mb-[10px] flex justify-between boder-inputBorder border-b"
+              >
+                <div class="w-[87.5%] flex justify-between">
+                  <p>Số lượng đơn license</p>
+                  <p>3/3</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="p-[16px] mb-[10px] flex justify-between boder-inputBorder border-b"
+          >
+            <div class="w-[90%] flex justify-between">
+              <p>Số lượng đơn thành công</p>
+              <p>3/3</p>
+            </div>
+          </div>
+
+          <div
+            class="p-[16px] mb-[10px] flex justify-between boder-inputBorder border-b"
+          >
+            <div class="w-[90%] flex justify-between">
+              <p>Số lượng đơn hoàn</p>
+              <p>3/3</p>
+            </div>
+          </div>
+
+          <div
+            class="p-[16px] mb-[10px] flex justify-between boder-inputBorder border-b"
+          >
+            <div class="w-[90%] flex justify-between">
+              <p>Số lượng đơn đang giao</p>
+              <p>3/3</p>
+            </div>
+          </div>
+
+          <div
+            class="p-[16px] mb-[10px] flex justify-between boder-inputBorder border-b"
+          >
+            <div class="w-[90%] flex justify-between">
+              <p>Doanh thu</p>
+              <p>3/3</p>
+            </div>
+            <div class="flex items-center">
+              <span
+                *ngIf="iconRevenueDown"
+                class="cursor-pointer"
+                nz-icon
+                nzType="down"
+                nzTheme="outline"
+                (click)="showRevenueTongle()"
+              ></span>
+              <span
+                class="cursor-pointer"
+                (click)="hideRevenueTongle()"
+                *ngIf="showRevenueDetail"
+                nz-icon
+                nzType="up"
+                nzTheme="outline"
+              ></span>
+            </div>
+          </div>
+
+          <div *ngIf="showRevenueDetail">
+            <div class="flex justify-end">
+              <div
+                class="p-[16px] w-[80%] mb-[10px] flex justify-between boder-inputBorder border-b"
+              >
+                <div class="w-[87.5%] flex justify-between">
+                  <p>Doanh thu đơn thường</p>
+                  <p>3/3</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-end">
+              <div
+                class="p-[16px] w-[80%] mb-[10px] flex justify-between boder-inputBorder border-b"
+              >
+                <div class="w-[87.5%] flex justify-between">
+                  <p>Doanh thu đơn license</p>
+                  <p>3/3</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="p-[16px] mb-[10px] flex justify-between boder-inputBorder border-b"
+          >
+            <div class="w-[90%] flex justify-between">
+              <p>Số lượng người dùng mới</p>
+              <p>3/3</p>
+            </div>
+          </div>
+
+          <div
+            class="p-[16px] mb-[10px] flex justify-between boder-inputBorder border-b"
+          >
+            <div class="w-[90%] flex justify-between">
+              <p>Số lượng CTV mới</p>
+              <p>3/3</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="detailAgency"
+    class="w-full mt-[20px] bg-white border boder-inputBorder rounded-[16px] p-[30px]"
+  >
+    <p class="text-textDarkBold font-bold pb-[10px]">Sơ đồ biểu thị</p>
+    <div class="border-b mb-[30px]"></div>
+
+    <div
+      class="w-[25%] border boder-inputBorder rounded-[8px] p-[10px] mb-[10px]"
+    >
+      <mat-select placeholder="So sánh" (selectionChange)="showDetail()">
+        @for (agency of agencyes; track agency) {
+        <mat-option [value]="agency.value">{{ agency.viewValue }}</mat-option>
+        }
+      </mat-select>
+    </div>
+  </div>
+</div>

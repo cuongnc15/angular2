@@ -1,0 +1,12 @@
+.blur {
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+}
+
+.table-row:hover {
+  background-color: white; /* Màu nền khi hover */
+  transform: scale(1); /* Hiệu ứng nổi lên */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s; /* Đặt thời gian chuyển động */
+}

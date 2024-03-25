@@ -1,0 +1,114 @@
+<div class="modal">
+  <div
+    class="p-[10px] md:w-[50%] md:h-[60%] w-[400px] h-[300px] overflow-auto rounded-[16px] bg-white fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
+    [formGroup]="applyForm"
+  >
+    <div
+      class="w-[90%] border-b-[1px] boder-inputBorder flex justify-between m-auto pb-[10px]"
+    >
+      <p class="text-textDarkBold font-bold w-[90%] text-center">Chi tiết</p>
+      <mat-icon
+        aria-hidden="false"
+        aria-label="cancel icon"
+        fontIcon="cancel"
+        class="w-[22px] cursor-pointer"
+        (click)="closeModal()"
+      ></mat-icon>
+    </div>
+
+    <div class="p-[10px] flex gap-[15px]">
+      <div class="w-[50%]">
+        <p
+          class="text-textDarkBold text-[14px] leading-[20px] font-bold pb-[10px]"
+        >
+          Username
+        </p>
+        <input
+          formControlName="userNameInput"
+          class="w-full border boder-inputBorder rounded-[8px] p-[10px] mb-[10px] focus:outline-none"
+          type="text"
+        />
+
+        <p
+          class="text-textDarkBold text-[14px] leading-[20px] font-bold pb-[10px]"
+        >
+          Chức vụ
+        </p>
+        <div
+          class="w-full border boder-inputBorder rounded-[8px] p-[10px] mb-[10px]"
+        >
+          <mat-select
+            formControlName="role"
+            (selectionChange)="selectedRole($event.value)"
+          >
+            @for (tittle of tittles; track tittle) {
+            <mat-option [value]="tittle.value">{{
+              tittle.viewValue
+            }}</mat-option>
+            }
+          </mat-select>
+        </div>
+
+        <p
+          class="text-textDarkBold text-[14px] leading-[20px] font-bold pb-[10px]"
+        >
+          Trạng thái
+        </p>
+        <div
+          class="w-full border boder-inputBorder rounded-[8px] p-[10px] mb-[10px]"
+        >
+          <mat-select [(value)]="statuses[0].value">
+            <mat-option [value]="statuses[0].value">
+              <p class="text-textRed">Hoạt động</p>
+            </mat-option>
+            <mat-option [value]="statuses[1].value">
+              Không hoạt động
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+
+      <div class="w-[50%]">
+        <p
+          class="text-textDarkBold text-[14px] leading-[20px] font-bold pb-[10px]"
+        >
+          Họ và tên
+        </p>
+        <input
+          formControlName="fullName"
+          class="w-full border boder-inputBorder rounded-[8px] p-[10px] mb-[10px] focus:outline-none"
+          type="text"
+        />
+
+        <p
+          class="text-textDarkBold text-[14px] leading-[20px] font-bold pb-[10px]"
+        >
+          Agency
+        </p>
+        <div
+          class="w-full border boder-inputBorder rounded-[8px] p-[10px] mb-[10px]"
+        >
+          <mat-select
+            formControlName="agency"
+            (selectionChange)="selectedAgency($event.value)"
+          >
+            @for (agency of agencyes; track agency) {
+            <mat-option [value]="agency.value">{{
+              agency.viewValue
+            }}</mat-option>
+            }
+          </mat-select>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button
+        class="w-[50%] text-[#096DD9] bg-[#F0F5FF] font-bold border border-[#096DD9] py-[10px] rounded-[6px]"
+        (click)="updateForm()"
+      >
+        Lưu
+      </button>
+    </div>
+  </div>
+</div>

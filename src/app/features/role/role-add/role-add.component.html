@@ -1,0 +1,107 @@
+<div class="modal">
+  <div
+    class="p-[10px] w-[50%] h-[60%] overflow-auto rounded-[16px] bg-white fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
+  >
+    <div
+      class="w-[90%] border-b-[1px] boder-inputBorder flex justify-between m-auto pb-[10px]"
+    >
+      <p class="text-textDarkBold font-bold w-[90%] text-center">Gán vai trò</p>
+      <mat-icon
+        aria-hidden="false"
+        aria-label="cancel icon"
+        fontIcon="cancel"
+        class="w-[22px] cursor-pointer"
+        (click)="closeModal()"
+      ></mat-icon>
+    </div>
+
+    <form [formGroup]="applyForm" class="p-[10px] flex gap-[15px]">
+      <div class="w-[50%]">
+        <p
+          class="text-textDarkBold text-[14px] leading-[20px] font-bold pb-[10px]"
+        >
+          Username*
+        </p>
+        <input
+          formControlName="username"
+          class="w-full border boder-inputBorder rounded-[8px] p-[10px] mb-[10px] focus:outline-none"
+          type="text"
+          placeholder="Nhập username"
+        />
+        <p class="text-textRed hidden pb-[10px]">username không tồn tại</p>
+
+        <p
+          class="text-textDarkBold text-[14px] leading-[20px] font-bold pb-[10px]"
+        >
+          Chức vụ
+        </p>
+        <div
+          class="w-full border boder-inputBorder rounded-[8px] p-[10px] mb-[10px]"
+        >
+          <mat-select
+            placeholder="Chọn chức vụ"
+            (selectionChange)="selectedRole($event.value)"
+          >
+            @for (tittle of tittles; track tittle) {
+            <mat-option [value]="tittle.value">{{
+              tittle.viewValue
+            }}</mat-option>
+            }
+          </mat-select>
+        </div>
+
+        <app-status></app-status>
+      </div>
+
+      <div class="w-[50%]">
+        <p
+          class="text-textDarkBold text-[14px] leading-[20px] font-bold pb-[10px]"
+        >
+          Họ và tên
+        </p>
+        <input
+          formControlName="fullName"
+          class="w-full border boder-inputBorder rounded-[8px] p-[10px] mb-[10px] focus:outline-none"
+          type="text"
+          placeholder="Nhập Họ và tên"
+        />
+        <p class="text-textRed hidden pb-[10px]">Họ và tên không tồn tại</p>
+
+        <p
+          class="text-textDarkBold text-[14px] leading-[20px] font-bold pb-[10px]"
+        >
+          Agency
+        </p>
+        <div
+          class="w-full border boder-inputBorder rounded-[8px] p-[10px] mb-[10px]"
+        >
+          <mat-select
+            (selectionChange)="selectedAgency($event.value)"
+            placeholder="Chọn Agency"
+          >
+            @for (agency of agencyes; track agency) {
+            <mat-option [value]="agency.value">{{
+              agency.viewValue
+            }}</mat-option>
+            }
+          </mat-select>
+        </div>
+      </div>
+    </form>
+
+    <div class="flex gap-[30px] justify-center">
+      <button
+        class="w-[25%] text-[#949494] bg-[#F1F1F1] font-bold border border-[#949494] px-[16px] py-[8px] rounded-[6px]"
+        (click)="closeModal()"
+      >
+        Hủy bỏ
+      </button>
+      <button
+        class="w-[25%] text-primary bg-[#E7F7F4] font-bold border border-primary px-[16px] py-[8px] rounded-[6px]"
+        (click)="addRole2()"
+      >
+        Tạo
+      </button>
+    </div>
+  </div>
+</div>

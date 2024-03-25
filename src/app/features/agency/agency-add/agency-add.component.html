@@ -1,0 +1,209 @@
+<div class="bg-bgGrey p-[20px]">
+  <div class="flex items-center justify-between pb-[10px]">
+    <p class="text-primary font-bold">THÊM MỚI AGENCY</p>
+
+    <button
+      class="text-primary bg-[#E7F7F4] font-semibold border border-primary px-[16px] py-[8px] rounded-[6px]"
+    >
+      Tạo
+    </button>
+  </div>
+
+  <div class="flex gap-[15px]">
+    <div class="w-[40%]">
+      <div
+        class="w-full mb-[20px] bg-white border boder-inputBorder rounded-[16px] p-[20px]"
+      >
+        <p class="text-textDarkBold font-bold pb-[10px]">Mã agency*</p>
+        <input
+          class="w-full mb-[10px] border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+          type="text"
+          placeholder="Nhập mã agency"
+        />
+        <p class="text-textRed hidden pb-[10px]">Mã agency bị trống</p>
+
+        <p class="text-textDarkBold font-bold pb-[10px]">Tên agency*</p>
+        <input
+          class="w-full mb-[10px] border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+          type="text"
+          placeholder="Nhập tên agency"
+        />
+        <p class="text-textRed hidden pb-[10px]">Tên agency bị trống</p>
+
+        <p class="text-textDarkBold font-bold pb-[10px]">Username đứng đầu*</p>
+        <input
+          class="w-full mb-[10px] border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+          type="text"
+          placeholder="Nhập tên Username đứng đầu"
+        />
+        <p class="text-textRed hidden pb-[10px]">Username đứng đầu bị trống</p>
+
+        <p class="text-textDarkBold font-bold pb-[10px]">Trạng thái</p>
+        <app-status></app-status>
+      </div>
+
+      <div
+        class="w-full bg-white border boder-inputBorder rounded-[16px] p-[20px]"
+      >
+        <p class="text-textDarkBold font-bold pb-[10px]">Domain*</p>
+        <input
+          class="w-full mb-[10px] border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+          type="text"
+          placeholder="Nhập Domain"
+        />
+        <p class="text-textRed hidden pb-[10px]">Domain bị trống</p>
+
+        <p class="text-textDarkBold font-bold pb-[10px]">Số điện thoại*</p>
+        <input
+          class="w-full mb-[10px] border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+          type="text"
+          placeholder="Nhập số điện thoại"
+        />
+        <p class="text-textRed hidden pb-[10px]">Số điện thoại bị trống</p>
+
+        <p class="text-textDarkBold font-bold pb-[10px]">Email*</p>
+        <input
+          class="w-full mb-[10px] border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+          type="text"
+          placeholder="Nhập Email"
+        />
+        <p class="text-textRed hidden pb-[10px]">Email bị trống</p>
+
+        <p class="text-textDarkBold font-bold pb-[10px]">Lĩnh vực</p>
+        <div
+          class="w-full border boder-inputBorder rounded-[8px] p-[10px] mb-[10px]"
+        >
+          <mat-select placeholder="Lĩnh vực">
+            @for (category of categories; track category) {
+            <mat-option [value]="category.value">{{
+              category.viewValue
+            }}</mat-option>
+            }
+          </mat-select>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-[60%]">
+      <div
+        class="w-full mb-[20px] bg-white border boder-inputBorder rounded-[16px] p-[20px]"
+      >
+        <p class="text-textDarkBold font-bold pb-[10px]">Gán gói dịch vụ</p>
+
+        <div class="flex w-full p-[10px]">
+          <div class="w-[50%] p-[10px]">
+            <p class="text-textDarkBold font-bold pb-[10px]">Hình thức gán*</p>
+            <div
+              class="w-full border boder-inputBorder rounded-[8px] p-[10px] mb-[10px]"
+            >
+              <mat-select placeholder="Chọn hình thức gán">
+                @for (tittle of packages; track tittle) {
+                <mat-option [value]="tittle.value">{{
+                  tittle.viewValue
+                }}</mat-option>
+                }
+              </mat-select>
+            </div>
+
+            <p class="text-textDarkBold font-bold pb-[10px]">Gói*</p>
+            <div
+              class="w-full border boder-inputBorder rounded-[8px] p-[10px] mb-[10px]"
+            >
+              <mat-select placeholder="Chọn Gói">
+                @for (package of packages; track package) {
+                <mat-option [value]="package.value">{{
+                  package.viewValue
+                }}</mat-option>
+                }
+              </mat-select>
+            </div>
+
+            <p class="text-textDarkBold font-bold pb-[10px]">Thời hạn*</p>
+            <div
+              class="w-full border boder-inputBorder rounded-[8px] p-[10px] mb-[10px]"
+            >
+              <mat-select placeholder="Chọn thời hạn">
+                @for (tittle of packages; track tittle) {
+                <mat-option [value]="tittle.value">{{
+                  tittle.viewValue
+                }}</mat-option>
+                }
+              </mat-select>
+            </div>
+
+            <p class="text-[#737373] font-bold pb-[10px]">Tổng tiền*</p>
+            <p class="bg-[#E4E4E4] py-[12px] px-[14px] rounded-[8px]"></p>
+          </div>
+
+          <div class="w-[50%] p-[10px]">
+            <p class="text-textDarkBold font-bold pb-[10px]">Chiết khấu (%)*</p>
+            <input
+              class="w-full mb-[10px] border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+              type="text"
+              placeholder="Nhập chiết khấu"
+            />
+
+            <p class="text-[#737373] font-bold pb-[10px]">
+              Doanh thu thực thu*
+            </p>
+            <p
+              class="bg-[#E4E4E4] mb-[10px] py-[12px] px-[14px] rounded-[8px]"
+            ></p>
+
+            <p class="text-[#737373] font-bold pb-[10px]">Ngày bắt đầu*</p>
+            <div
+              class="flex justify-between border boder-inputBorder rounded-[8px] p-[10px] mb-[10px]"
+            >
+              <input
+                class="w-full focus:outline-none"
+                matInput
+                [matDatepicker]="picker"
+                placeholder="--/--/--"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </div>
+
+            <p class="text-[#737373] font-bold pb-[10px]">Ngày hết hạn*</p>
+            <div
+              class="flex justify-between border boder-inputBorder rounded-[8px] p-[10px] mb-[10px]"
+            >
+              <input
+                class="w-full focus:outline-none"
+                matInput
+                [matDatepicker]="picker2"
+                placeholder="--/--/--"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker2"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="w-full mb-[20px] bg-white border boder-inputBorder rounded-[16px] p-[20px]"
+      >
+        <p class="text-textDarkBold font-bold pb-[10px]">Mã số thuế</p>
+        <input
+          class="w-full mb-[10px] border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+          type="text"
+          placeholder="Nhập Mã số thuế"
+        />
+
+        <p class="text-textDarkBold font-bold pb-[10px]">Địa chỉ</p>
+        <input
+          class="w-full mb-[10px] border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+          type="text"
+          placeholder="Nhập Địa chỉ"
+        />
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,296 @@
+<div class="p-[20px] w-full bg-bgGrey">
+  <div class="flex items-center justify-between pb-[10px]">
+    <p class="text-primary font-bold">THÊM MỚI GÓI DỊCH VỤ</p>
+
+    <button
+      class="text-primary bg-[#E7F7F4] font-bold border border-primary px-[16px] py-[8px] rounded-[6px]"
+      (click)="addService2()"
+    >
+      Tạo
+    </button>
+  </div>
+
+  <div class="flex gap-[10px]">
+    <div class="w-[40%]">
+      <form
+        [formGroup]="applyForm"
+        class="bg-white p-[20px] mb-[20px] rounded-[16px] border boder-inputBorder"
+      >
+        <p class="text-textDarkBold font-bold pb-[10px]">Mã gói dịch vụ*</p>
+        <input
+          id="maSanPham"
+          formControlName="maSanPham"
+          class="w-full border boder-inputBorder rounded-[8px] p-[10px] mb-[5px] focus:outline-none"
+          type="text"
+          placeholder="Nhập mã sản phẩm"
+        />
+        <p
+          *ngIf="!applyForm.value.maSanPham?.trim()"
+          class="text-textRed pb-[10px]"
+        >
+          Mã sản phẩm bị trống
+        </p>
+
+        <p class="text-textDarkBold font-bold py-[10px]">Tên gói dịch vụ*</p>
+        <input
+          id="serviceName"
+          formControlName="serviceName"
+          class="w-full border mb-[5px] boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+          type="text"
+          placeholder="Nhập tên gói dịch vụ"
+        />
+        <p
+          *ngIf="!applyForm.value.serviceName?.trim()"
+          class="text-textRed pb-[10px]"
+        >
+          Tên gói dịch vụ bị trống
+        </p>
+
+        <p class="text-textDarkBold font-bold py-[10px]">Trạng thái</p>
+
+        <app-status></app-status>
+      </form>
+      <div class="bg-white p-[20px] rounded-[16px] border boder-inputBorder">
+        <p class="text-textDarkBold font-bold py-[10px]">Mô tả</p>
+
+        <div id="editor">
+          <p>Hello World!</p>
+          <p>Some initial <strong>bold</strong> text</p>
+          <p><br />asdasd</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-[60%]">
+      <div
+        class="bg-white p-[20px] mb-[20px] rounded-[16px] border boder-inputBorder"
+      >
+        <div>
+          <p class="text-textDarkBold font-bold pb-[10px]">Cấu hình cơ bản</p>
+        </div>
+        <div class="flex gap-[10px] p-[10px]">
+          <form [formGroup]="applyForm" class="w-[50%]">
+            <p class="text-textDarkBold font-bold py-[10px]">
+              Số lượng người dùng*
+            </p>
+            <input
+              (input)="checkNaNUser()"
+              formControlName="userAmount"
+              class="w-full mb-[5px] border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+              type="text"
+              placeholder="Nhập Số lượng người dùng"
+            />
+            <p
+              *ngIf="!applyForm.value.userAmount?.trim() || !isNumeric"
+              class="text-textRed pb-[10px]"
+            >
+              Số lượng người dùng bị trống / không phải là số
+            </p>
+
+            <p class="text-textDarkBold font-bold py-[10px]">Số lượng admin*</p>
+            <input
+              (input)="checkNaNAdmin()"
+              formControlName="adminAmount"
+              class="w-full mb-[5px] border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+              type="text"
+              placeholder="Số lượng admin"
+            />
+            <p
+              *ngIf="!applyForm.value.adminAmount?.trim() || !isNumeric"
+              class="text-textRed pb-[10px]"
+            >
+              Số lượng admin bị trống
+            </p>
+
+            <p class="text-textDarkBold font-bold py-[10px]">Số lượng CTV*</p>
+            <input
+              (input)="checkNaNCollaborators()"
+              formControlName="collaboratorsAmount"
+              class="w-full mb-[5px] border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+              type="text"
+              placeholder="Nhập Số lượng CTV"
+            />
+            <p
+              *ngIf="!applyForm.value.collaboratorsAmount?.trim() || !isNumeric"
+              class="text-textRed pb-[10px]"
+            >
+              Số lượng CTV bị trống
+            </p>
+
+            <p class="text-textDarkBold font-bold py-[10px]">Số cấp CTV*</p>
+            <input
+              formControlName="collaboratorsLevel"
+              class="w-full mb-[5px] border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+              type="text"
+              placeholder="Nhập Số cấp CTV"
+            />
+            <p
+              *ngIf="!applyForm.value.collaboratorsLevel?.trim()"
+              class="text-textRed pb-[10px]"
+            >
+              Số cấp CTV bị trống
+            </p>
+          </form>
+
+          <form [formGroup]="applyForm" class="w-[50%]">
+            <p class="text-textDarkBold font-bold py-[10px]">
+              Số lượng thông báo tối đa qua WEB*
+            </p>
+            <input
+              class="w-full mb-[5px] border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+              type="text"
+              placeholder="Nhập mã sản phẩm"
+            />
+            <p class="text-textRed hidden pb-[10px]">Mã sản phẩm bị trống</p>
+
+            <p class="text-textDarkBold font-bold py-[10px]">
+              Số lượng thông báo tối đa qua APP*
+            </p>
+            <input
+              class="w-full mb-[5px] border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+              type="text"
+              placeholder="Nhập mã sản phẩm"
+            />
+            <p class="text-textRed hidden pb-[10px]">Mã sản phẩm bị trống</p>
+
+            <p class="text-textDarkBold font-bold py-[10px]">
+              Dung lượng tối đa (GB)*
+            </p>
+            <input
+              class="w-full mb-[5px] border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+              type="text"
+              placeholder="Nhập mã sản phẩm"
+            />
+            <p class="text-textRed hidden pb-[10px]">Mã sản phẩm bị trống</p>
+
+            <p class="text-textDarkBold font-bold py-[10px]">
+              Số lượng đơn hàng tối đa*
+            </p>
+            <input
+              (input)="checkNaNMaxOrderAmount()"
+              formControlName="maxOrderAmount"
+              class="w-full mb-[5px] border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+              type="text"
+              placeholder="Nhập số lượng đơn hàng tối đa"
+            />
+            <p
+              *ngIf="!applyForm.value.maxOrderAmount?.trim() || !isNumeric"
+              class="text-textRed pb-[10px]"
+            >
+              Số lượng đơn hàng tối đa bị trống / không phải là số
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <div
+        class="bg-white p-[20px] mb-[20px] rounded-[16px] border boder-inputBorder"
+      >
+        <div>
+          <p class="text-textDarkBold font-bold py-[10px]">
+            Cấu hình chiết khấu
+          </p>
+        </div>
+
+        <div class="flex gap-[30px]">
+          <div class="w-[50%]">
+            <p class="text-textDarkBold font-bold py-[10px]">
+              Chiết khấu thẻ NFC và webmini (%)*
+            </p>
+            <input
+              class="w-full border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+              type="text"
+              placeholder="Nhập mã sản phẩm"
+            />
+          </div>
+          <div class="w-[50%]">
+            <p class="text-textDarkBold font-bold py-[10px]">
+              Chiết khấu thẻ NFC và webmini (%)*
+            </p>
+            <input
+              class="w-full border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+              type="text"
+              placeholder="Nhập mã sản phẩm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="bg-white p-[20px] mb-[20px] rounded-[16px] border boder-inputBorder"
+      >
+        <p class="text-textDarkBold font-bold py-[10px]">Cấu hình giá tiền</p>
+
+        <table
+          class="p-[20px] mb-[20px] rounded-[16px] border boder-inputBorder"
+        >
+          <thead
+            class="text-textDarkBold font-bold *:p-[20px] *:border *:boder-inputBorder"
+          >
+            <td class="">STT</td>
+            <td class="">Thời hạn</td>
+            <td class="">Giá niêm yết (VNĐ)</td>
+            <td class="">Giá khuyến mãi (VNĐ)</td>
+            <td></td>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pay of payment; let rowIndex = index">
+              <td class="p-[5px] border boder-inputBorder text-center">
+                {{ rowIndex + 1 }}
+              </td>
+              <td class="p-[5px] border boder-inputBorder">
+                <div
+                  class="flex items-center h-full p-[10px] text-textDarkBold"
+                >
+                  <mat-select
+                    [disabled]="selectDis[rowIndex]"
+                    (selectionChange)="
+                      filteredOptions(rowIndex, findIndex($event.value))
+                    "
+                    class="text-textDarkBold"
+                    placeholder="Thời hạn"
+                  >
+                    <mat-option
+                      *ngFor="let period of periods; let optionIndex = index"
+                      [disabled]="dis[optionIndex]"
+                      [value]="period.value"
+                      >{{ period.value }}</mat-option
+                    >
+                  </mat-select>
+                </div>
+              </td>
+              <td class="p-[5px] border boder-inputBorder"></td>
+              <td class="p-[5px] border boder-inputBorder"></td>
+              <td
+                class="p-[5px] border boder-inputBorder text-center"
+                (click)="deletePayment(rowIndex)"
+              >
+                <span
+                  class="text-textRed cursor-pointer"
+                  nz-icon
+                  nzType="delete"
+                  nzTheme="outline"
+                ></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button
+          class="text-primary flex items-center font-semibold border border-primary px-[16px] py-[8px] rounded-[6px]"
+          (click)="addPayment()"
+          [disabled]="addDisable"
+          *ngIf="addMax"
+        >
+          <span
+            class="p-[5px]"
+            nz-icon
+            nzType="plus-circle"
+            nzTheme="outline"
+          ></span
+          ><span>Thêm mới</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

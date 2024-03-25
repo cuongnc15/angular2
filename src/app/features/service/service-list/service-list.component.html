@@ -1,0 +1,134 @@
+<div class="text-textDarkBold">
+  <form
+    [formGroup]="applyForm"
+    class="grid lg:grid-cols-6 md:grid-cols-3 gap-[15px] p-[20px] w-full"
+  >
+    <input
+      (input)="changeSearch()"
+      formControlName="serviceName"
+      class="border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+      type="text"
+      placeholder="Tên gói dịch vụ"
+    />
+
+    <input
+      (input)="changeSearch()"
+      formControlName="userAmount"
+      class="border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+      type="text"
+      title="Số lượng người dùng"
+      placeholder="Số lượng người dùng"
+    />
+
+    <input
+      (input)="changeSearch()"
+      formControlName="maxOrderAmount"
+      class="border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+      type="text"
+      placeholder="Số lượng đơn hàng tối đa"
+      title="Số lượng đơn hàng tối đa"
+    />
+
+    <input
+      (input)="changeSearch()"
+      formControlName="collaboratorsAmount"
+      class="border boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+      type="text"
+      placeholder="Số lượng CTV"
+    />
+
+    <div
+      class="border flex items-center h-full boder-inputBorder rounded-[8px] p-[10px] mb-[10px]"
+    >
+      <mat-select class="text-textPlaceHolder" placeholder="Thời hạn">
+        @for (period of periods; track period) {
+        <mat-option [value]="period.value">{{ period.viewValue }}</mat-option>
+        }
+      </mat-select>
+    </div>
+
+    <app-button-search></app-button-search>
+  </form>
+
+  <div class="p-[20px] bg-bgGrey h-full">
+    <div class="flex items-center justify-between pb-[10px]">
+      <p class="text-primary font-bold">DANH SÁCH GÓI DỊCH VỤ</p>
+      <a [routerLink]="['/danhSachDichVu/taoMoi']">
+        <button
+          class="text-primary flex items-center bg-[#E7F7F4] font-semibold border border-primary px-[16px] py-[8px] rounded-[6px]"
+        >
+          <span
+            class="p-[5px]"
+            nz-icon
+            nzType="plus-circle"
+            nzTheme="outline"
+          ></span
+          ><span>Thêm mới</span>
+        </button>
+      </a>
+    </div>
+
+    <table
+      class="w-full font-normal border-collapse rounded-[16px] bg-white border border-inputBorder mt-[20px]"
+    >
+      <thead class="font-bold text-textDarkBold">
+        <tr class="truncate table-row hover:text-clip border rounded-[8px]">
+          <th class="p-[10px] border rounded-[8px] border-inputBorder">STT</th>
+          <th class="p-[10px] border border-inputBorder">Mã gói dịch vụ</th>
+          <th class="p-[10px] border border-inputBorder">Tên dịch vụ</th>
+          <th class="p-[10px] border border-inputBorder">
+            Số lượng người dùng
+          </th>
+          <th class="p-[10px] border border-inputBorder">Số lượng đơn hàng</th>
+          <th class="p-[10px] border border-inputBorder">Số lượng CTV</th>
+          <th class="p-[10px] border border-inputBorder">Trạng thái</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <a
+          *ngFor="
+            let number = index;
+            let service;
+            of: services
+              | paginate
+                : {
+                    itemsPerPage: pageSize,
+                    currentPage: page,
+                    totalItems: total
+                  }
+          "
+          class="table-row"
+          [routerLink]="[service.id]"
+        >
+          <td class="p-[10px] text-center border border-inputBorder">
+            {{ (page - 1) * pageSize + number + 1 }}
+          </td>
+          <td
+            class="p-[10px] text-[#5CBF91] font-semibold border border-inputBorder"
+          >
+            {{ service.serviceCode }}
+          </td>
+          <td class="p-[10px] border border-inputBorder">
+            {{ service.serviceName }}
+          </td>
+          <td class="p-[10px] border border-inputBorder">
+            {{ service.user | number : "1.0-0" }}
+          </td>
+          <td class="p-[10px] border border-inputBorder">
+            {{ service.order | number : "1.0-0" }}
+          </td>
+          <td class="p-[10px] border border-inputBorder">
+            {{ service.collaborators }}
+          </td>
+          <td class="p-[10px] border border-inputBorder">
+            {{ service.status }}
+          </td>
+        </a>
+      </tbody>
+    </table>
+    <div class="flex justify-end p-[10px]">
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </div>
+  </div>
+</div>

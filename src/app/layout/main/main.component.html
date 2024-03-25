@@ -1,0 +1,99 @@
+<nz-layout class="app-layout">
+  <nz-sider
+    class="menu-sidebar"
+    nzCollapsible
+    nzWidth="256px"
+    nzBreakpoint="md"
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null"
+  >
+    <div class="sidebar-logo">
+      <div>
+        <img src="../../../assets/images/logo.png" alt="logo" />
+        <h1 class="font-bold !ml-[8px]">
+          <span class="text-[#EF4345]">TRUE</span
+          ><span class="text-primary">CONNECT</span>
+        </h1>
+      </div>
+    </div>
+    <ul
+      nz-menu
+      nzTheme="light"
+      nzMode="inline"
+      [nzInlineCollapsed]="isCollapsed"
+    >
+      <li nz-submenu nzOpen nzTitle="Phân quyền" nzIcon="user">
+        <ul>
+          <li [routerLink]="'/ganVaiTro'" nz-menu-item nzMatchRouter>
+            Gán vai trò
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Quản lý người dùng" nzIcon="user">
+        <ul>
+          <li [routerLink]="'/user'" nz-menu-item nzMatchRouter>
+            Danh sách người dùng
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="QR code" nzIcon="qrcode">
+        <ul>
+          <li [routerLink]="'/qrCode'" nz-menu-item nzMatchRouter>Tạo lô QR</li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Gói dịch vụ" nzIcon="unordered-list">
+        <ul>
+          <li [routerLink]="'/danhSachDichVu'" nz-menu-item nzMatchRouter>
+            Danh sách dịch vụ
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Quản lý Agency" nzIcon="team">
+        <ul>
+          <li [routerLink]="'/agency'" nz-menu-item nzMatchRouter>Danh sách</li>
+        </ul>
+        <ul>
+          <li [routerLink]="'/agency/analystic'" nz-menu-item nzMatchRouter>
+            Thống kê
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+          <span
+            class="trigger"
+            nz-icon
+            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+          ></span>
+        </span>
+        <div class="!mr-8">
+          <span class="mr-2">Admin</span>
+          <nz-avatar
+            nz-dropdown
+            [nzDropdownMenu]="menu"
+            [nzSize]="30"
+            nzIcon="user"
+          ></nz-avatar>
+        </div>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu nzSelectable>
+    <li (click)="logout()" nz-menu-item nzDanger>
+      <i class="fa-solid fa-arrow-right-from-bracket mr-2"></i>
+      <span>Đăng xuất</span>
+    </li>
+  </ul>
+</nz-dropdown-menu>

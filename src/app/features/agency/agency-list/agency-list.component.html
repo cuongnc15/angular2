@@ -1,0 +1,182 @@
+<div>
+  <form
+    [formGroup]="applyForm"
+    class="grid lg:grid-cols-5 md:grid-cols-2 gap-[15px] p-[20px]"
+  >
+    <input
+      (input)="changeSearch()"
+      id="agencyCode"
+      formControlName="agencyCode"
+      class="border h-full boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+      type="text"
+      placeholder="Mã agency"
+    />
+
+    <input
+      id="agencyName"
+      (input)="changeSearch()"
+      formControlName="agencyName"
+      class="border h-full boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+      type="text"
+      placeholder="Tên agency"
+    />
+
+    <input
+      class="border h-full boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+      type="text"
+      placeholder="Email"
+    />
+
+    <input
+      class="border h-full boder-inputBorder rounded-[8px] p-[10px] focus:outline-none"
+      type="text"
+      placeholder="Số điện thoại"
+    />
+
+    <app-status class="h-full"></app-status>
+
+    <div class="w-full border boder-inputBorder rounded-[8px] p-[10px]">
+      <mat-select
+        panelClass="selectCategory"
+        placeholder="Lĩnh vực"
+        class="text-textPlaceHolder"
+      >
+        @for (category of categories; track category) {
+        <mat-option [value]="category.value">{{
+          category.viewValue
+        }}</mat-option>
+        }
+      </mat-select>
+    </div>
+
+    <div class="border boder-inputBorder rounded-[8px] p-[10px]">
+      <mat-select placeholder="Gói dịch vụ" class="text-textPlaceHolder">
+        @for (package of packages; track package) {
+        <mat-option [value]="package.value">{{ package.viewValue }}</mat-option>
+        }
+      </mat-select>
+    </div>
+
+    <div
+      class="flex justify-between border ps-[10px] boder-inputBorder rounded-[8px]"
+    >
+      <input
+        class="w-full focus:outline-none"
+        matInput
+        [matDatepicker]="picker"
+        placeholder="Ngày bắt đầu"
+      />
+      <mat-datepicker-toggle
+        class="text-[#949494]"
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </div>
+
+    <div
+      class="flex ps-[10px] justify-between border boder-inputBorder rounded-[8px]"
+    >
+      <input
+        class="w-full focus:outline-none"
+        matInput
+        [matDatepicker]="picker2"
+        placeholder="Ngày hết hạn"
+      />
+      <mat-datepicker-toggle
+        class="text-[#949494]"
+        matIconSuffix
+        [for]="picker2"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </div>
+    <div class="relative">
+      <app-button-search class="md:absolute right-0 top-1/2 -translate-y-1/2">
+      </app-button-search>
+    </div>
+  </form>
+
+  <div class="bg-bgGrey p-[20px]">
+    <div class="flex items-center justify-between pb-[10px]">
+      <p class="text-primary font-bold">DANH SÁCH AGENCY</p>
+      <a [routerLink]="['/agency/add']">
+        <button
+          class="text-primary flex items-center bg-[#E7F7F4] font-semibold border border-primary px-[16px] py-[8px] rounded-[6px]"
+        >
+          <span
+            class="p-[5px]"
+            nz-icon
+            nzType="plus-circle"
+            nzTheme="outline"
+          ></span>
+          Thêm mới
+        </button>
+      </a>
+    </div>
+
+    <table
+      class="w-full font-normal border-collapse rounded-[16px] bg-white border border-inputBorder mt-[20px]"
+    >
+      <thead class="font-bold text-textDarkBold">
+        <tr class="truncate table-row hover:text-clip border rounded-[8px]">
+          <th class="p-[10px] border rounded-[8px] border-inputBorder">STT</th>
+          <th class="p-[10px] border border-inputBorder">Mã agency</th>
+          <th class="p-[10px] border border-inputBorder">Tên agency</th>
+          <th class="p-[10px] border border-inputBorder">Số điện thoại</th>
+          <th class="p-[10px] border border-inputBorder">Domain</th>
+          <th class="p-[10px] border border-inputBorder">Lĩnh vực</th>
+          <th class="p-[10px] border border-inputBorder">Tài khoản gốc</th>
+          <th class="p-[10px] border border-inputBorder">Gói dịch vụ</th>
+          <th class="p-[10px] border border-inputBorder">Ngày bắt đầu</th>
+          <th class="p-[10px] border border-inputBorder">Ngày hết hạn</th>
+          <th class="p-[10px] border border-inputBorder">Trạng thái</th>
+        </tr>
+      </thead>
+
+      <tbody class="text-textDarkBold">
+        <tr
+          *ngFor="
+            let number = index;
+            let agency;
+            of: agencyes
+              | paginate
+                : {
+                    itemsPerPage: pageSize,
+                    currentPage: page,
+                    totalItems: total
+                  }
+          "
+          class="table-row w-full"
+        >
+          <td class="p-[10px] text-center border border-inputBorder">
+            {{ (page - 1) * pageSize + number + 1 }}
+          </td>
+          <td
+            class="p-[10px] text-[#5CBF91] font-semibold border border-inputBorder"
+          >
+            {{ agency.userName }}
+          </td>
+          <td class="p-[10px] border border-inputBorder">
+            {{ agency.agency }}
+          </td>
+          <td class="p-[10px] border border-inputBorder">
+            {{ agency.agency }}
+          </td>
+          <td class="p-[10px] border border-inputBorder">
+            {{ agency.effectiveDate }}
+          </td>
+          <td class="p-[10px] border border-inputBorder">
+            {{ agency.expirationDate }}
+          </td>
+          <td class="p-[10px] border border-inputBorder">
+            {{ agency.status }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="flex justify-end p-[10px]">
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </div>
+  </div>
+</div>

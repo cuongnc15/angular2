@@ -1,0 +1,49 @@
+<div class="modal">
+  <div
+    class="p-[10px] w-[50%] h-[40%] overflow-auto rounded-[16px] bg-white fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
+  >
+    <div class="relative m-auto pb-[10px]">
+      <p class="text-textDarkBold font-bold text-center">
+        Xác nhận xóa cấu hình
+      </p>
+      <div
+        class="w-[90%] m-auto border-b-[1px] boder-inputBorder py-[10px]"
+      ></div>
+      <mat-icon
+        aria-hidden="false"
+        aria-label="cancel icon"
+        fontIcon="cancel"
+        class="w-[22px] absolute right-0 top-0 cursor-pointer"
+        (click)="closeModal()"
+      ></mat-icon>
+    </div>
+
+    <div class="text-center text-textDarkBold p-[20px]">
+      <p>Bạn sắp xóa vĩnh viễn cấu hình giá tiền với:</p>
+      <p class="font-bold">
+        Thời hạn <span>{{ dataFromParent }}</span>
+      </p>
+      <p class="font-bold">Giá niêm yết <span></span></p>
+      <p class="font-bold">Giá khuyến mãi <span></span></p>
+    </div>
+    <p>
+      Hành động này <span class="text-red-500">không thể khôi phục</span> , bạn
+      có chắc chắn thực hiện điều này không?
+    </p>
+
+    <div class="flex gap-[30px] py-[30px] justify-center">
+      <button
+        class="w-[25%] text-[#949494] bg-[#F1F1F1] font-bold border border-[#949494] px-[16px] py-[8px] rounded-[6px]"
+        (click)="closeModal()"
+      >
+        Hủy bỏ
+      </button>
+      <button
+        class="w-[25%] text-[#F93232] bg-[#FFF0F0] font-bold border border-[#F93232] px-[16px] py-[8px] rounded-[6px]"
+        (click)="delete()"
+      >
+        Xóa
+      </button>
+    </div>
+  </div>
+</div>
